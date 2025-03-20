@@ -1,6 +1,11 @@
+import Navbar from "../src/Component/Navbar"
+
 function EditPage(){
     return(
-        <h1>This is Edit Page</h1>
+       <>
+       <Navbar />
+       <Form text="editPage" />
+       </>
     )
 }
 export default EditPage
