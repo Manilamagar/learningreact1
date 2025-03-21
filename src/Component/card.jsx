@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 
 function Card({blog}){
     return(
-        <Link to="/singlepage">
+        <Link to={"/singlepage/"+blog.id} >
 <div className="flex px-3 py-3">
   <div className="max-w-sm rounded overflow-hidden shadow-lg">
     <img className="w-full" src={blog.thumbil} alt="Sunset in the mountains" />

@@ -35,7 +35,7 @@ if(response.status==200){
         fetchBlogs()
         //  console.log("this is blog created using useState")
     },[])
-
+    console.log(Blogs)
 
     return(
     <>

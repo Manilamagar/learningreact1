@@ -1,6 +1,32 @@
 
+import axios from "axios"
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+
+
 function Form({text}){
-    console.log(text,"Yo chai")
+  let navigate = useNavigate()
+  const [title,setTitle] = useState("")
+  const [subtitle, setSubtitle] = useState("")
+  const [thumbil, setThumbil] = useState("")
+  const [description, setDescription] = useState("")
+
+    // console.log(text,"Yo chai")
+async function createBlog(e){
+e.preventDefault()
+let response = await axios.post("https://67dba9511fd9e43fe475534e.mockapi.io/Blogs",{
+  title,
+  subtitle,
+  thumbil,
+  description
+})
+if (response.status ==201){
+  navigate("/")
+}else{
+  console.log("Something went wrong")
+}
+} 
+
     return(
         <div className="flex items-center justify-center h-screen">
   <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-lg">
@@ -8,10 +34,10 @@ function Form({text}){
     <div className="text-center">
       <h1 className="text-2xl font-semibold text-blue-600 flex items-center justify-center">
         <span className="mr-1 text-3xl font-bold">ES</span>
-        BAZAR
+        BLOG
       </h1>
       <p className="text-gray-500 text-sm mt-1">
-        Best online ecommerce website for you
+        Blog Management website
       </p>
     </div>
     {/* Divider */}
@@ -20,51 +46,43 @@ function Form({text}){
         {text=="editPage" ? "Edit Page" : "Create Page" }
       </span>
     </div>
-    {/* Form */}
-    <form className="space-y-4">
-      {/* Full Name */}
+    
+    <form onSubmit={createBlog} className="space-y-4">
+     
       <div>
         {
             text == "createPage" && (
-<input type="text" placeholder="Full Name" className="w-full px-4 py-2 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring focus:ring-blue-100" />
+<input type="text" onChange={(e)=>setTitle(e.target.value)} placeholder="Full Name" className="w-full px-4 py-2 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring focus:ring-blue-100" />
             )
-        }
-        
+        } 
       </div>
-      {/* Mobile Number */}
+     
       <div>
-        <input type="Title" placeholder="Title" className="w-full px-4 py-2 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring focus:ring-blue-100" />
+        <input type="Title" onChange={(e)=>setTitle(e.target.value)} placeholder="Title" className="w-full px-4 py-2 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring focus:ring-blue-100" />
       </div>
-      {/* Email */}
+     
       <div>
-        <input type="Sub-Title" placeholder="Sub-Title" className="w-full px-4 py-2 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring focus:ring-blue-100" />
+        <input type="Sub-Title" onChange={(e)=>setSubtitle(e.target.value)}  placeholder="Sub-Title" className="w-full px-4 py-2 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring focus:ring-blue-100" />
       </div>
-      {/* Password */}
+     
       <div className="relative">
-        <input type="Thumbail" placeholder="Thumbail URL" className="w-full px-4 py-2 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring focus:ring-blue-100" />
+        <input type="Thumbail" onChange={(e)=>setThumbil(e.target.value)} placeholder="Thumbail URL" className="w-full px-4 py-2 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring focus:ring-blue-100" />
+        <span className="absolute right-3 top-2.5 text-gray-400 cursor-pointer">
+        </span>
+      </div>
+    
+      <div className="relative">
+        <input type="Description" onChange={(e)=>setDescription(e.target.value)} placeholder="Description" className="w-full px-4 py-2 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring focus:ring-blue-100" />
         <span className="absolute right-3 top-2.5 text-gray-400 cursor-pointer">
           👁️
         </span>
       </div>
-      {/* Confirm Password */}
-      <div className="relative">
-        <input type="Description" placeholder="Description" className="w-full px-4 py-2 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring focus:ring-blue-100" />
-        <span className="absolute right-3 top-2.5 text-gray-400 cursor-pointer">
-          👁️
-        </span>
-      </div>
-      {/* Submit Button */}
-      <button type="Create" className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-2 rounded-lg hover:from-blue-600 hover:to-blue-700 transition">
+      
+      <button type="submit" className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-2 rounded-lg hover:from-blue-600 hover:to-blue-700 transition">
         {text=="editPage" ? "Edit" : "Create"} 
       </button>
     </form>
-    {/* Footer */}
-    <div className="mt-4 text-center">
-      <p className="text-gray-500 text-sm">
-        Have your account? 
-        <a href="#" className="text-blue-500 font-medium hover:underline">Login Now</a>
-      </p>
-    </div>
+    
   </div>
 </div>
     )
